@@ -1,0 +1,20 @@
+{
+  "name": "coffeescoreboard",
+  "version": "1.0.0",
+  "description": "Frontend for a scoreboard tracking who makes the most coffee for Abakus. (Student organization at NTNU, Trondheim)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dist": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asmundh/coffeescoreboard-client.git"
+  },
+  "author": "asmundh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/asmundh/coffeescoreboard-client/issues"
+  },
+  "homepage": "https://github.com/asmundh/coffeescoreboard-client#readme"
+}
