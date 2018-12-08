@@ -1,6 +1,6 @@
 import webpack from 'webpack';
 import path from 'path';
-import HTMLMWebpackPlugin from 'html-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 
 
@@ -13,18 +13,29 @@ export default config = {
       path: path.resolve(__dirname, 'dist'),
       filename: 'bundle.js'
   },
+  devtool: 'inline-source-map',
+  devServer: {
+     contentBase: './dist',
+  },
   module: {
-     rules: [
-        {
-           test: /\.(js|jsx)$/,
-           exclude: /node_modules/,
-           use: ['babel-loader']
-        }
-     ]
-  }
-  ,
+     rules: [{
+         test: /\.(js|jsx)$/,
+         exclude: /node_modules/,
+         use: ['babel-loader']
+      },
+      {
+         test: /(\.css|\.scss|\.sass)$/,
+         use: [{
+            loader: 'style-loader',
+         },{
+            loader: 'css-loader',
+         },{
+            loader: 'sass-loader',
+         }],
+      }],
+   },
    plugins: [
-      new HTMLMWebpackPlugin({
+      new HtmlWebpackPlugin({
          template: 'index.html'
       }),
       new CleanWebpackPlugin(['dist'])
