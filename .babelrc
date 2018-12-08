@@ -1,9 +1,10 @@
 {
    "presets": [
       "@babel/env",
-      "@babel/react"
+      "@babel/react",
+      "es2015"
    ],
    "plugins": [
-      "babel/plugin-proposal-class-properties"
+      "@babel/plugin-proposal-class-properties"
    ]
 }
