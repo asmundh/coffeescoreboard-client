@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React from 'react';
 import ReactDom from 'react-dom';
 import CoffeeScoreboard from './CoffeeScoreboard/CoffeeScoreboard';
+import Header from './Header';
 
 const App = () => {
   ReactDom.render(
     <div id="wrapper">
+      <Header />
       <CoffeeScoreboard />
     </div>,
     document.getElementById('root'),
