@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { object, objectOf } from 'prop-types';
+import './CoffeeScoreboardPerson.css';
 
 class ScoreboardPerson extends Component {
   static propTypes = {
@@ -7,23 +8,20 @@ class ScoreboardPerson extends Component {
   }
 
   static defaultProps = {
-    person: { name: 'Abakule', rank: 1, score: 10 },
+    person: { name: 'Abakule', rank: -1, score: 0 },
   }
 
-  testData = {
-    name: 'åsmund',
-    rfid: 1234,
-    score: 24,
-    rank: 1,
-  };
-
   render() {
-    const { person } = this.props;
+    const { person, index } = this.props;
     return (
-      <div className="ScoreboardPerson">
-        <p id="rank">{person.rank}</p>
-        <p id="name">{this.testData.name}</p>
-        <p id="score">{this.testData.score}</p>
+      <div className="ScoreboardPerson" index={index}>
+        <div id="rank">{person.rank}</div>
+        <div id="name">{person.name}</div>
+        <div id="score">
+{person.score}
+{' '}
+kaffer traktet
+</div>
       </div>
     );
   }
