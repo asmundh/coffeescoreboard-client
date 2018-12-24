@@ -3,21 +3,25 @@
   grid-gap: 10px;
   grid-template-columns: 1fr 2fr;
   outline: 2px black solid;
+  margin: 20px;
 }
 
 
 #rank {
     grid-column: 1 / 2;
     grid-row: 1;
-
+    font-size: 3vh;
+    text-align: center;
 }
 
 #name {
   grid-column: 2;
   grid-row: 1;
+  text-align: center;
 }
 
 #score {
   grid-column: 2;
   grid-row: 2;
+  text-align: center;
 }

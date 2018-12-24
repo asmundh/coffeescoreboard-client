@@ -6,12 +6,7 @@ import './App.css';
 
 const App = () => {
   ReactDom.render(
-    <div style={{
-      flex: 6,
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-    }}
-    >
+    <div id="pageWrapper">
       <Header />
       <CoffeeScoreboard />
     </div>,

@@ -18,10 +18,9 @@ class ScoreboardPerson extends Component {
         <div id="rank">{person.rank}</div>
         <div id="name">{person.name}</div>
         <div id="score">
-{person.score}
-{' '}
-kaffer traktet
-</div>
+          {person.score}
+          { ' kaffer traktet'}
+        </div>
       </div>
     );
   }

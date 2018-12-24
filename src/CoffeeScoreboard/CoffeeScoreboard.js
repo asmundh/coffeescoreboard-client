@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ScoreboardPerson from './CoffeeScoreboardPerson';
+import './CoffeeScoreboard.css';
 
 class CoffeeScoreboard extends Component {
   testData = [{
@@ -24,7 +25,7 @@ class CoffeeScoreboard extends Component {
   render() {
     return (
       <div className="Scoreboard">
-        <div>{this.renderScoreboard()}</div>
+        {this.renderScoreboard()}
       </div>
     );
   }
