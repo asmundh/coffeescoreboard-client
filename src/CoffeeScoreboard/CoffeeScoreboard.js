@@ -13,6 +13,28 @@ class CoffeeScoreboard extends Component {
     rfid: 12320,
     score: 19,
     rank: 2,
+  },
+  {
+    name: 'åsmund',
+    rfid: 1234,
+    score: 24,
+    rank: 1,
+  }, {
+    name: 'Sara',
+    rfid: 12320,
+    score: 19,
+    rank: 2,
+  },
+  {
+    name: 'åsmund',
+    rfid: 1234,
+    score: 24,
+    rank: 1,
+  }, {
+    name: 'Sara',
+    rfid: 12320,
+    score: 19,
+    rank: 2,
   }];
 
   renderScoreboard() {
