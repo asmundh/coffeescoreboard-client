@@ -1,6 +1,5 @@
 .Scoreboard {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
   justify-content: space-around;
 }
