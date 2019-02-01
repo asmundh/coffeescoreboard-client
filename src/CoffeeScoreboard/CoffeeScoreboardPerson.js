@@ -15,7 +15,7 @@ class ScoreboardPerson extends Component {
     const { person, index } = this.props;
     return (
       <div className="ScoreboardPerson" index={index}>
-        <div id="rank">{person.rank}</div>
+        <div id="rank">{index + 1}</div>
         <div id="name">{person.name}</div>
         <div id="score">
           {person.score}

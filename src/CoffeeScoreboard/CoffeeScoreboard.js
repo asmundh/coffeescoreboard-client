@@ -18,23 +18,52 @@ class CoffeeScoreboard extends Component {
     name: 'åsmund',
     rfid: 1234,
     score: 24,
-    rank: 1,
-  }, {
-    name: 'Sara',
-    rfid: 12320,
-    score: 19,
-    rank: 2,
+    rank: 3,
   },
   {
     name: 'åsmund',
     rfid: 1234,
     score: 24,
-    rank: 1,
+    rank: 4,
+  },
+  {
+    name: 'åsmund',
+    rfid: 1234,
+    score: 24,
+    rank: 5,
+  },
+  {
+    name: 'åsmund',
+    rfid: 1234,
+    score: 24,
+    rank: 6,
   }, {
     name: 'Sara',
     rfid: 12320,
     score: 19,
-    rank: 2,
+    rank: 7,
+  },
+  {
+    name: 'åsmund',
+    rfid: 1234,
+    score: 24,
+    rank: 8,
+  }, {
+    name: 'Sara',
+    rfid: 12320,
+    score: 19,
+    rank: 9,
+  },
+  {
+    name: 'åsmund',
+    rfid: 1234,
+    score: 24,
+    rank: 10,
+  }, {
+    name: 'Sara',
+    rfid: 12320,
+    score: 19,
+    rank: 11,
   }];
 
   renderScoreboard() {
