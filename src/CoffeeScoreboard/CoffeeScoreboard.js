@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ScoreboardPerson from './CoffeeScoreboardPerson';
+import ScoreboardPerson from './ScoreboardPerson';
 import './CoffeeScoreboard.css';
 
 class CoffeeScoreboard extends Component {
