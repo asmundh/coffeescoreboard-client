@@ -26,17 +26,4 @@ class ScoreboardPerson extends Component {
   }
 }
 
-
-/*
-
-const ScoreboardPerson = () =>
-  // const { name, score, rank } = this.props.person;
-     <div className="ScoreboardPerson">
-      <div id="rank">{rank}</div>
-      <div id="name">{name}</div>
-      <div id="score">{score}</div>
-    </div>
-);
-
-*/
 export default ScoreboardPerson;
