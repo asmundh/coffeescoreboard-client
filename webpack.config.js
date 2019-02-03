@@ -24,15 +24,13 @@ module.exports = {
         },
       },
       {
-        test: /(\.css|\.scss|\.sass)$/,
+        test: /(\.css)$/,
         use: [
           {
           loader: 'style-loader',
         }, {
           loader: 'css-loader',
-        }, {
-          loader: 'sass-loader',
-        }
+        },
       ],
       },
     ],
