@@ -1,5 +1,5 @@
 import React from 'react';
-import './CoffeeScoreboardPerson.css';
+import './ScoreboardPerson.css';
 import {
   shape, number, string,
 } from 'prop-types';
