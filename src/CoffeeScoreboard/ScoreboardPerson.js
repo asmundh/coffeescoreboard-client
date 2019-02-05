@@ -13,7 +13,7 @@ const ScoreboardPerson = (props) => {
       <div id="name">{person.name}</div>
       <div id="score">
         {person.score}
-        { ' kaffer traktet'}
+        { ' kanner traktet'}
       </div>
     </div>
   );
@@ -26,6 +26,8 @@ ScoreboardPerson.propTypes = {
       rfid: number,
       score: number,
       rank: number,
+      litresBrewed: number,
+      gramsOfCoffee: number,
     },
   ).isRequired,
   index: number.isRequired,

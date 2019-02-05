@@ -2,73 +2,20 @@ import React, { Component } from 'react';
 import ScoreboardPerson from './ScoreboardPerson';
 import './CoffeeScoreboard.css';
 
+const data = require('../../public/sampleData.json');
+
+
 class CoffeeScoreboard extends Component {
-  testData = [{
-    name: 'åsmund',
-    rfid: 1234,
-    score: 24,
-    rank: 1,
-  }, {
-    name: 'Sara',
-    rfid: 12320,
-    score: 19,
-    rank: 2,
-  },
-  {
-    name: 'åsmund',
-    rfid: 1234,
-    score: 24,
-    rank: 3,
-  },
-  {
-    name: 'åsmund',
-    rfid: 1234,
-    score: 24,
-    rank: 4,
-  },
-  {
-    name: 'åsmund',
-    rfid: 1234,
-    score: 24,
-    rank: 5,
-  },
-  {
-    name: 'åsmund',
-    rfid: 1234,
-    score: 24,
-    rank: 6,
-  }, {
-    name: 'Sara',
-    rfid: 12320,
-    score: 19,
-    rank: 7,
-  },
-  {
-    name: 'åsmund',
-    rfid: 1234,
-    score: 24,
-    rank: 8,
-  }, {
-    name: 'Sara',
-    rfid: 12320,
-    score: 19,
-    rank: 9,
-  },
-  {
-    name: 'åsmund',
-    rfid: 1234,
-    score: 24,
-    rank: 10,
-  }, {
-    name: 'Sara',
-    rfid: 12320,
-    score: 19,
-    rank: 11,
-  }];
+  sortJSON = (JSONobject, keyToSortBy) => {
+    const sortedPeople = JSONobject.sort((obj1, obj2) => obj2[keyToSortBy] - obj1[keyToSortBy]);
+    for (let x = 0; x < sortedPeople.length; x += 1) {
+      sortedPeople[x].rank = x + 1;
+    }
+    return sortedPeople;
+  };
 
   renderScoreboard() {
-    // const { data } = this.props;
-    return this.testData.map((entry, index) => (
+    return this.sortJSON(data, 'score').map((entry, index) => (
       <ScoreboardPerson person={entry} index={index} />
     ));
   }
