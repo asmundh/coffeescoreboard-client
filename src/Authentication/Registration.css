@@ -1,0 +1,22 @@
+
+#registration-form {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.sign-up-field {
+  display:flex;
+  flex-direction: column;
+}
+
+
+#study-options {
+  display:flex;
+}
+
+#signup-study {
+  display:flex;
+  flex-direction: row;
+  justify-items: auto;
+}

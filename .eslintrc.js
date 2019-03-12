@@ -21,5 +21,8 @@ module.exports = {
   },
  "rules":{
     "react/jsx-filename-extension": [WARN, { "extensions": [".js", ".jsx"] }],
+    "required": {
+      "some": [ "nesting", "id" ]
+    }
   }
 };
