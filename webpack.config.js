@@ -6,14 +6,17 @@ module.exports = {
   mode: 'development',
   entry: './src/App.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
   },
+  devtool: 'inline-source-map',
   devServer: {
     contentBase: './dist',
+    historyApiFallback: true,
   },
-  module:{
-    rules:[
+  module: {
+    rules: [
       {
         test: /\.(js|jsx)$/,
         use: {
@@ -27,11 +30,11 @@ module.exports = {
         test: /(\.css)$/,
         use: [
           {
-          loader: 'style-loader',
-        }, {
-          loader: 'css-loader',
-        },
-      ],
+            loader: 'style-loader',
+          }, {
+            loader: 'css-loader',
+          },
+        ],
       },
     ],
   },
@@ -41,4 +44,4 @@ module.exports = {
     }),
     new CleanWebpackPlugin(['dist']),
   ],
-}
+};

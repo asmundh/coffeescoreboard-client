@@ -1,5 +1,4 @@
 .Scoreboard {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  justify-content: space-around;
+  grid-template-columns: repeat(8 fr);
 }
