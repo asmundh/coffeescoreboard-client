@@ -27,30 +27,26 @@ class Registration extends Component {
 
   render() {
     return (
-      <form id="registration-form">
-        <h2>Registrer ny koker</h2>
-
-        <div id="signup-name">
-          <label id="signup-name-field" className="sign-up-field">Fullt navn </label>
-          <input
-            id="signup-name-field"
-            type="text"
-            placeholder="Navn Navnesen"
-            value={this.state.name}
-            onChange={this.handleChange.bind(this)}
-          />
-        </div>
+      <form
+        id="registration-form"
+        acceptCharset="UTF-8"
+      >
+        <legend>Registrer ny koker</legend>
+        <input
+          id="signup-name-field"
+          type="text"
+          placeholder="Fullt Navn"
+          value={this.state.name}
+          spellCheck="false"
+          onChange={this.handleChange.bind(this)}
+        />
 
         <br />
 
-        <label id="signup-study-field" className="sign-up-field">Hva studerer du? </label>
-        <div id="signup-study">
-          <label htmlFor="komtek">Komtek</label>
-          <input type="radio" className="study-option" id="komtek" name="study-options" checked="checked" />
+        <input type="radio" className="study-option" id="komtek" name="study-options" checked="checked" />
 
-          <label htmlFor="data">Data</label>
-          <input type="radio" className="study-option" id="data" name="study-options" />
-        </div>
+        <label htmlFor="data">Data</label>
+        <input type="radio" className="study-option" id="data" name="study-options" />
 
       </form>
     );
