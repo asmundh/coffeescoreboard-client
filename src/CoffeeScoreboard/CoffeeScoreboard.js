@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import ScoreboardPerson from './ScoreboardPerson';
 import './CoffeeScoreboard.css';
+import { socket } from '../App';
+import { CoffeeBrewedEvent } from '../websocket/event';
 
 // const data = require('../../public/sampleData.json');
 
+const fetchScores = () => axios
+  .get('http://localhost:3000/users/')
+  .then(response => response.data);
 
 class CoffeeScoreboard extends Component {
   constructor() {
@@ -22,12 +27,17 @@ class CoffeeScoreboard extends Component {
 
 
   componentDidMount() {
-    axios
-      .get('http://localhost:3000/users/')
-      .then((response) => {
-        // console.log(response.data);
-        this.setState({ scoreboard: response.data });
-      });
+    this.fetchScores();
+    socket.on(CoffeeBrewedEvent, this.onCoffeeBrewed.bind(this));
+  }
+
+  componentWillUnmount() {
+    socket.off(CoffeeBrewedEvent, this.onCoffeeBrewed);
+  }
+
+  onCoffeeBrewed() {
+    console.log('Refreshing scores');
+    this.fetchScores();
   }
 
   sortJSON = (JSONobject, keyToSortBy) => {
@@ -38,6 +48,12 @@ class CoffeeScoreboard extends Component {
     }
     return sortedPeople;
   };
+
+  fetchScores() {
+    fetchScores().then((scores) => {
+      this.setState({ scoreboard: scores });
+    });
+  }
 
   renderScoreboard() {
     return this.sortJSON(this.state.scoreboard, 'kaffeScore').map((entry, index) => (
