@@ -4,7 +4,7 @@ import {
   shape, number, string,
 } from 'prop-types';
 
-const coffeesTracted = (amount) => {
+const coffeesTractedText = (amount) => {
   if (amount === 1) {
     return ' kanne traktet';
   }
@@ -19,7 +19,7 @@ const ScoreboardPerson = (props) => {
       <div id="name">{person.name}</div>
       <div id="score">
         {person.kaffeScore}
-        {coffeesTracted(person.kaffeScore)}
+        {coffeesTractedText(person.kaffeScore)}
       </div>
       <div id="kilos-used">
         {Math.round(person.kaffeScore * 0.105 * 100) / 100}
@@ -38,7 +38,7 @@ ScoreboardPerson.propTypes = {
   person: shape(
     {
       name: string,
-      rfid: number,
+      rfid: string,
       score: number,
       rank: number,
       litresBrewed: number,

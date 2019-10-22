@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter as Router, Route, Redirect,
+} from 'react-router-dom';
 import socketIo from 'socket.io-client';
 import CoffeeScoreboard from './CoffeeScoreboard/CoffeeScoreboard';
-import Header from './Header';
 import './App.css';
-import Registration from './Authentication';
+import Registration from './Registration';
 
 
 export const socket = socketIo('http://localhost:3000');
@@ -17,10 +18,10 @@ export const App = () => {
   ReactDom.render(
     <Router>
       <div id="pageWrapper">
-        <Header />
         <Route exact path="/" component={() => <Redirect to="/coffee" />} />
         <Route path="/coffee" component={CoffeeScoreboard} />
-        <Route path="/register" component={Registration} />
+        <Route exact path="/register" component={Registration} />
+        <Route path="/register/:rfid" component={Registration} />
       </div>
     </Router>,
     document.getElementById('root'),

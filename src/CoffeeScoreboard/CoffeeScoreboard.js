@@ -3,7 +3,8 @@ import axios from 'axios';
 import ScoreboardPerson from './ScoreboardPerson';
 import './CoffeeScoreboard.css';
 import { socket } from '../App';
-import { CoffeeBrewedEvent } from '../websocket/event';
+import { CoffeeBrewedEvent, CardNotFoundEvent } from '../websocket/event';
+import Header from '../Header';
 
 // const data = require('../../public/sampleData.json');
 
@@ -19,9 +20,11 @@ class CoffeeScoreboard extends Component {
         _id: '123',
         name: 'Laget av Åsmund Haugse',
         study: 'data',
-        rfid: 1337,
+        rfid: '1337',
         kaffeScore: 1,
       }],
+      newUser: false,
+      headerTitle: 'Største kaffekokerne i Abakus',
     };
   }
 
@@ -29,6 +32,7 @@ class CoffeeScoreboard extends Component {
   componentDidMount() {
     this.fetchScores();
     socket.on(CoffeeBrewedEvent, this.onCoffeeBrewed.bind(this));
+    socket.on(CardNotFoundEvent, this.onCardNotFound.bind(this));
   }
 
   componentWillUnmount() {
@@ -37,6 +41,11 @@ class CoffeeScoreboard extends Component {
 
   onCoffeeBrewed() {
     console.log('Refreshing scores');
+    this.fetchScores();
+  }
+
+  onCardNotFound() {
+    console.log('Prompting new user');
     this.fetchScores();
   }
 
@@ -55,17 +64,26 @@ class CoffeeScoreboard extends Component {
     });
   }
 
+  promptNewUser() {
+    this.setState({ newUser: true });
+  }
+
   renderScoreboard() {
-    return this.sortJSON(this.state.scoreboard, 'kaffeScore').map((entry, index) => (
+    const { scoreboard, newUser } = this.state;
+    return this.sortJSON(scoreboard, 'kaffeScore').map((entry, index) => (
       <ScoreboardPerson person={entry} index={index} />
     ));
   }
 
   render() {
+    const { headerTitle } = this.state;
     return (
-      <div className="Scoreboard">
-        {this.renderScoreboard()}
-      </div>
+      <>
+        <Header headerTitle={headerTitle} />
+        <div className="Scoreboard">
+          {this.renderScoreboard()}
+        </div>
+      </>
     );
   }
 }

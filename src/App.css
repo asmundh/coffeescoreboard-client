@@ -5,21 +5,20 @@
     flex-wrap: 'wrap';
 }
 body {
-  background-color: #FCDDA7;
+  background-color: #DDAD74;
 }
 
 #header {
   text-align: center;
   min-height: 12vh;
-  background-color: #AA4D00;
+  background-color: #422B08;
   top: 0;
   padding: 10px 16px;
-  font-size: 3vh;
   font-family: Raleway, 'Helvetica Neue', Arial, sans-serif;
   max-width: 100%;
   position: sticky;
 }
 
 #header-title {
-  color: white;
+  color: #FFDEB7;
 }
