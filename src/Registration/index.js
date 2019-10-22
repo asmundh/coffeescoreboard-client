@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import './Registration.css';
 import Axios from 'axios';
 import { objectOf, string } from 'prop-types';
-
 import RadioButtons from '../components/RadioButtons';
 import Header from '../Header';
 
@@ -17,6 +16,8 @@ class Registration extends Component {
       yearOptions: ['1.', '2.', '3.', '4.', '5.'],
       year: undefined,
       headerTitle: 'Registrer ny koker',
+      submitted: false,
+      badSubmitText: undefined,
     };
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -45,18 +46,41 @@ class Registration extends Component {
       name, study, year,
     } = this.state;
     const { match } = this.props;
-    Axios.post('http://localhost:3000/users', {
-      name: name,
-      study: study,
-      rfid: match.params.rfid,
-      kaffeScore: 0,
-      year: parseInt(`${year}`.substr(0, 1), 10),
-    });
+    if (name && study && year && match.params.rfid) {
+      Axios.post('http://localhost:3000/users', {
+        name: name,
+        study: study,
+        rfid: match.params.rfid,
+        kaffeScore: 0,
+        year: parseInt(`${year}`.substr(0, 1), 10),
+      }).then((res) => {
+        if (res.status === 201) {
+          this.setState({ badSubmitText: undefined });
+          this.setState({ submitted: true });
+          console.log('TODO: Send tilbake til scoreboard');
+        }
+      }, (error) => {
+        this.setState({ badSubmitText: 'Noe gikk gærent på backenden!' }); // TODO: Håndter så badSubmitText vises på frontenden ved feil på backend
+      });
+    } else {
+      this.setState({ badSubmitText: 'Ugyldig informasjon!' });
+      this.setState({ submitted: false });
+    }
+  }
+
+  renderBadSubmit() {
+    const { badSubmitText } = this.state;
+    if (badSubmitText) {
+      return (
+        <p className="user-warning">{badSubmitText}</p>
+      );
+    }
+    return <React.Fragment />;
   }
 
   render() {
     const {
-      name, studyOptions, yearOptions, headerTitle,
+      name, studyOptions, yearOptions, headerTitle, submitted,
     } = this.state;
     return (
       <>
@@ -89,14 +113,14 @@ class Registration extends Component {
           />
 
           <p
-            className="register-user"
             role="button"
-            onClick={() => this.handleSubmit()}
+            onClick={() => { this.handleSubmit(); }}
+            className={`register-user${submitted ? '-selected' : ''}`}
             onKeyDown={() => this.handleSubmit()}
           >
-Registrer
-
+            Registrer
           </p>
+          {this.renderBadSubmit()}
         </div>
 
       </>

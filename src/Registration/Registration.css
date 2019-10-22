@@ -37,6 +37,16 @@
   color: #000000;
 }
 
+.user-warning {
+  font-family: Roboto;
+  display: flex;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 14px;
+  color: red;
+}
+
 .register-user {
   background: white;
   opacity: .8;
@@ -54,7 +64,11 @@
 
 .register-user-selected {
   background: #422B08;
+  color: #FFDEB7;
   opacity: .8;
-  padding: 20px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  width: 376px;
+  height: 48px;
+  font-size: 30px;
+  text-align: center;
 }
