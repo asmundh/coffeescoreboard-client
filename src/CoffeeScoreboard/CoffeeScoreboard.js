@@ -25,8 +25,9 @@ class CoffeeScoreboard extends Component {
         rfid: '1337',
         kaffeScore: 1,
       }],
-      newUser: false,
       headerTitle: 'Største kaffekokerne i Abakus',
+      showModal: false,
+      rfidToLink: null,
     };
   }
 
@@ -47,12 +48,14 @@ class CoffeeScoreboard extends Component {
   }
 
   onCardNotFound(data) {
-    const { history } = this.props;
     console.log(data);
+    this.setState({ showModal: true, rfidToLink: data.rfid });
 
-    this.fetchScores();
-    history.push(`/register/${data.rfid}`);
+    setTimeout(() => {
+      this.setState({ showModal: false });
+    }, 10 * 1000);
   }
+
 
   sortJSON = (JSONobject, keyToSortBy) => {
     // Legal keys: kaffeScore, rfid
@@ -63,18 +66,23 @@ class CoffeeScoreboard extends Component {
     return sortedPeople;
   };
 
+  displayModal() {
+    const { showModal, rfidToLink } = this.state;
+    console.log(rfidToLink);
+    if (showModal) {
+      return <Modal rfid={rfidToLink} />;
+    }
+    return <></>;
+  }
+
   fetchScores() {
     fetchScores().then((scores) => {
       this.setState({ scoreboard: scores });
     });
   }
 
-  promptNewUser() {
-    this.setState({ newUser: true });
-  }
-
   renderScoreboard() {
-    const { scoreboard, newUser } = this.state;
+    const { scoreboard } = this.state;
     return this.sortJSON(scoreboard, 'kaffeScore').map((entry, index) => (
       <ScoreboardPerson person={entry} index={index} />
     ));
@@ -88,7 +96,7 @@ class CoffeeScoreboard extends Component {
         <div className="Scoreboard">
           {this.renderScoreboard()}
         </div>
-        <Modal />
+        {this.displayModal()}
       </>
     );
   }

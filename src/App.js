@@ -7,8 +7,8 @@ import socketIo from 'socket.io-client';
 import CoffeeScoreboard from './CoffeeScoreboard/CoffeeScoreboard';
 import './App.css';
 import Registration from './Registration';
-import QRcode from './QRcode';
 import '@babel/polyfill';
+import 'sanitize.css';
 
 
 export const socket = socketIo('http://localhost:3000');
@@ -24,7 +24,6 @@ export const App = () => {
         <Route path="/coffee" component={CoffeeScoreboard} />
         <Route exact path="/register" component={CoffeeScoreboard} />
         <Route path="/register/:rfid" component={Registration} />
-        <Route path="/qrcode/:rfid" component={QRcode} />
       </div>
     </Router>,
     document.getElementById('root'),

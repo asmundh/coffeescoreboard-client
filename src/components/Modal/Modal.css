@@ -29,15 +29,6 @@
   flex-direction: column;
 }
 
-.ff .modal-text {
-  font-size: 140%;
-}
-
-
-.chrome .modal-text {
-  font-size: 130%;
-}
-
 .modal-text {
   font-family: Roboto;
   display: flex;
@@ -45,7 +36,6 @@
   font-weight: normal;
   line-height: 14px;
   font-size: 140%;
-
   color: #000000;
 }
 
