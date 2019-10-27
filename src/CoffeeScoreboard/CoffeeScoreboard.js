@@ -5,7 +5,6 @@ import './CoffeeScoreboard.css';
 import { socket } from '../App';
 import { CoffeeBrewedEvent, CardNotFoundEvent } from '../websocket/event';
 import Header from '../Header';
-import QRcodeWrapper from '../QRcode';
 import Modal from '../components/Modal';
 
 
@@ -89,7 +88,6 @@ class CoffeeScoreboard extends Component {
         <div className="Scoreboard">
           {this.renderScoreboard()}
         </div>
-        {/* <QRcodeWrapper /> */}
         <Modal />
       </>
     );
