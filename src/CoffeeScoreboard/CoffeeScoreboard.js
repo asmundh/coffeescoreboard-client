@@ -5,6 +5,9 @@ import './CoffeeScoreboard.css';
 import { socket } from '../App';
 import { CoffeeBrewedEvent, CardNotFoundEvent } from '../websocket/event';
 import Header from '../Header';
+import QRcodeWrapper from '../QRcode';
+import Modal from '../components/Modal';
+
 
 // const data = require('../../public/sampleData.json');
 
@@ -13,8 +16,8 @@ const fetchScores = () => axios
   .then(response => response.data);
 
 class CoffeeScoreboard extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       scoreboard: [{
         _id: '123',
@@ -32,7 +35,7 @@ class CoffeeScoreboard extends Component {
   componentDidMount() {
     this.fetchScores();
     socket.on(CoffeeBrewedEvent, this.onCoffeeBrewed.bind(this));
-    socket.on(CardNotFoundEvent, this.onCardNotFound.bind(this));
+    socket.on(CardNotFoundEvent, data => this.onCardNotFound(data).bind(this));
   }
 
   componentWillUnmount() {
@@ -44,9 +47,12 @@ class CoffeeScoreboard extends Component {
     this.fetchScores();
   }
 
-  onCardNotFound() {
-    console.log('Prompting new user');
+  onCardNotFound(data) {
+    const { history } = this.props;
+    console.log(data);
+
     this.fetchScores();
+    history.push(`/register/${data.rfid}`);
   }
 
   sortJSON = (JSONobject, keyToSortBy) => {
@@ -83,6 +89,8 @@ class CoffeeScoreboard extends Component {
         <div className="Scoreboard">
           {this.renderScoreboard()}
         </div>
+        {/* <QRcodeWrapper /> */}
+        <Modal />
       </>
     );
   }

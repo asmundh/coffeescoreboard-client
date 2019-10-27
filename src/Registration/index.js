@@ -1,8 +1,8 @@
 /* eslint-disable object-shorthand */
 import React, { Component } from 'react';
 import './Registration.css';
-import Axios from 'axios';
-import { objectOf, string } from 'prop-types';
+import axios from 'axios';
+import { objectOf, string, arrayOf } from 'prop-types';
 import RadioButtons from '../components/RadioButtons';
 import Header from '../Header';
 
@@ -25,8 +25,26 @@ class Registration extends Component {
     this.handleStudyOption = this.handleStudyOption.bind(this);
   }
 
+  componentDidMount() {
+    this.fetchPath();
+  }
+
   handleNameChange(nameVal) {
     this.setState({ name: nameVal });
+  }
+
+  fetchPath() {
+    const { match, history } = this.props;
+    axios
+      .get(`http://localhost:3000/rfidPath/${match.params.rfid}`)
+      .then(response => response.data.timeSinceScan)
+      .then((age) => {
+        console.log(age);
+        const validPath = (age < (2 * 60));
+        if (!validPath) history.push('/coffee');
+      }, (error) => {
+        history.push('/coffee');
+      });
   }
 
   handleStudyOption(value) {
@@ -45,9 +63,9 @@ class Registration extends Component {
     const {
       name, study, year,
     } = this.state;
-    const { match } = this.props;
+    const { match, history } = this.props;
     if (name && study && year && match.params.rfid) {
-      Axios.post('http://localhost:3000/users', {
+      axios.post('http://localhost:3000/users', {
         name: name,
         study: study,
         rfid: match.params.rfid,
@@ -57,7 +75,7 @@ class Registration extends Component {
         if (res.status === 201) {
           this.setState({ badSubmitText: undefined });
           this.setState({ submitted: true });
-          console.log('TODO: Send tilbake til scoreboard');
+          history.push('/coffee');
         }
       }, (error) => {
         this.setState({ badSubmitText: 'Noe gikk gærent på backenden!' }); // TODO: Håndter så badSubmitText vises på frontenden ved feil på backend
@@ -89,7 +107,7 @@ class Registration extends Component {
           className="registration-form"
           acceptCharset="UTF-8"
         >
-          <p className="user-question">Vi trenger å vite tre ting om deg</p>
+          {/* <p className="user-question">Vi trenger å vite tre ting om deg</p> */}
           <p className="user-question">Hva heter du?</p>
           <input
             className="signup-name-field"
@@ -130,6 +148,7 @@ class Registration extends Component {
 
 Registration.propTypes = {
   match: objectOf(string).isRequired,
+  history: arrayOf(string).isRequired,
 };
 
 export default Registration;

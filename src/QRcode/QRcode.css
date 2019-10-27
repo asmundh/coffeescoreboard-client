@@ -1,0 +1,17 @@
+.user-question {
+  font-family: Roboto;
+  display: flex;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 14px;
+  color: #000000;
+}
+
+.registration-form {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+  display: flex;
+}
