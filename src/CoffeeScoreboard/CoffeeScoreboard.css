@@ -1,4 +1,9 @@
 .Scoreboard {
-  display: grid;
-  grid-template-columns: repeat(8 fr);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+  display: flex;
+  width: 50%;
 }

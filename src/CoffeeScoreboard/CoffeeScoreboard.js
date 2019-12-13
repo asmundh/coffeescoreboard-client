@@ -35,7 +35,7 @@ class CoffeeScoreboard extends Component {
   componentDidMount() {
     this.fetchScores();
     socket.on(CoffeeBrewedEvent, this.onCoffeeBrewed.bind(this));
-    socket.on(CardNotFoundEvent, data => this.onCardNotFound(data).bind(this));
+    socket.on(CardNotFoundEvent, (data) => { console.log(data); this.onCardNotFound(data); });
   }
 
   componentWillUnmount() {
@@ -43,13 +43,14 @@ class CoffeeScoreboard extends Component {
   }
 
   onCoffeeBrewed() {
-    console.log('Refreshing scores');
+    // console.log('Refreshing scores');
     this.fetchScores();
   }
 
-  onCardNotFound(data) {
-    console.log(data);
-    this.setState({ showModal: true, rfidToLink: data.rfid });
+  onCardNotFound = (data) => {
+    // console.log(`Not found card${JSON.stringify(data)}`);
+    this.setState({ rfidToLink: data.rfid });
+    this.setState({ showModal: true });
 
     setTimeout(() => {
       this.setState({ showModal: false });
@@ -68,7 +69,7 @@ class CoffeeScoreboard extends Component {
 
   displayModal() {
     const { showModal, rfidToLink } = this.state;
-    console.log(rfidToLink);
+    // console.log(`displayModal${JSON.stringify(rfidToLink)}`);
     if (showModal) {
       return <Modal rfid={rfidToLink} />;
     }

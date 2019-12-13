@@ -5,7 +5,7 @@ import { string } from 'prop-types';
 
 const generateLink = (rfidToLink) => {
   console.log(rfidToLink);
-  const urlToLink = `http://localhost:3000/register/${rfidToLink}`;
+  const urlToLink = `http://localhost:8089/register/${rfidToLink}`;
   const qrParams = '&size=172x172&color=422b08&bgcolor=ddad74&format=svg';
   return `https://api.qrserver.com/v1/create-qr-code/?data=${urlToLink}${qrParams}`;
 };
@@ -21,8 +21,8 @@ const Modal = (props) => {
           <image xlinkHref={generateLink(rfid)} width="172" height="172" />
         </svg>
         <br />
-        <p className="modal-text">Eller gå inn på linken</p>
-        <a className="modal-link" href="nrk.no">{`http://localhost:3000/register/${rfid}`}</a>
+        <p className="modal-text">Eller gå inn på</p>
+        <a className="modal-link" href={`http://localhost:8089/register/${rfid}`}>{`http://localhost:8089/register/${rfid}`}</a>
       </div>
     </div>
   );
