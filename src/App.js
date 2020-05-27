@@ -22,7 +22,7 @@ export const App = () => {
       <div id="pageWrapper">
         <Route exact path="/" component={() => <Redirect to="/coffee" />} />
         <Route path="/coffee" component={CoffeeScoreboard} />
-        <Route exact path="/register" component={CoffeeScoreboard} />
+        <Route exact path="/register" component={Registration} />
         <Route path="/register/:rfid" component={Registration} />
       </div>
     </Router>,
