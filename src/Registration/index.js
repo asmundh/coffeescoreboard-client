@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable object-shorthand */
 import React, { Component } from 'react';
 import './Registration.css';
@@ -10,14 +11,14 @@ class Registration extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: undefined,
-      study: undefined,
+      name: null,
+      study: null,
       studyOptions: ['Data', 'Komtek'],
       yearOptions: ['1.', '2.', '3.', '4.', '5.'],
-      year: undefined,
+      year: null,
       headerTitle: 'Registrer ny koker',
       submitted: false,
-      badSubmitText: undefined,
+      badSubmitText: null,
     };
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,6 +34,14 @@ class Registration extends Component {
     this.setState({ name: nameVal });
   }
 
+  handleStudyOption(value) {
+    this.setState({ study: value });
+  }
+
+  handleYearOption(value) {
+    this.setState({ year: value });
+  }
+
   fetchPath() {
     const { match, history } = this.props;
     axios
@@ -45,18 +54,6 @@ class Registration extends Component {
       }, (error) => {
         history.push('/coffee');
       });
-  }
-
-  handleStudyOption(value) {
-    this.setState({
-      study: value,
-    });
-  }
-
-  handleYearOption(value) {
-    this.setState({
-      year: value,
-    });
   }
 
   handleSubmit() {

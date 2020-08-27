@@ -8,8 +8,6 @@ import Header from '../Header';
 import Modal from '../components/Modal';
 
 
-// const data = require('../../public/sampleData.json');
-
 const fetchScores = () => axios
   .get('http://localhost:3000/users/')
   .then(response => response.data);
