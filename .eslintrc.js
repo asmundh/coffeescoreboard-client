@@ -23,6 +23,7 @@ module.exports = {
     "react/jsx-filename-extension": [WARN, { "extensions": [".js", ".jsx"] }],
     "required": {
       "some": [ "nesting", "id" ]
-    }
+    },
+    "no-underscore-dangle": [2, {"allow": []}],
   }
 };
