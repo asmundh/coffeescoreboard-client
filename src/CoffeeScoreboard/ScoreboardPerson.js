@@ -28,7 +28,6 @@ ScoreboardPerson.propTypes = {
       name: string,
       rfid: string,
       score: number,
-      rank: number,
       litresBrewed: number,
       gramsOfCoffee: number,
     },
