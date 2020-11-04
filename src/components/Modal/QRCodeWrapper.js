@@ -31,9 +31,9 @@ class QRCodeWrapper extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         <div ref={this.qrcode} />
-      </div>
+      </>
     );
   }
 }

@@ -6,7 +6,8 @@ import { socket } from '../App';
 import { CoffeeBrewedEvent, CardNotFoundEvent } from '../websocket/event';
 import Header from '../Header';
 import Modal from '../components/Modal';
-
+import RegistrationModal from '../components/Modal/RegistrationModal';
+import CoffeeBrewedModal from '../components/Modal/CoffeeBrewedModal';
 
 const fetchScores = () => axios
   .get('http://localhost:3000/users/')
@@ -25,36 +26,38 @@ class CoffeeScoreboard extends Component {
       }],
       headerTitle: 'Største kaffekokerne i Abakus',
       showModal: false,
-      rfidToLink: null,
+      modalContent: null,
     };
   }
 
-
   componentDidMount() {
     this.fetchScores();
-    socket.on(CoffeeBrewedEvent, this.onCoffeeBrewed.bind(this));
-    socket.on(CardNotFoundEvent, (data) => { console.log(data); this.onCardNotFound(data); });
+    socket.on(CoffeeBrewedEvent, data => this.onCoffeeBrewed(data));
+    socket.on(CardNotFoundEvent, data => this.onCardNotFound(data));
   }
 
   componentWillUnmount() {
     socket.off(CoffeeBrewedEvent, this.onCoffeeBrewed);
   }
 
-  onCoffeeBrewed() {
-    // console.log('Refreshing scores');
+  onCoffeeBrewed(data) {
+    const { score, name } = data.brewerInfo;
     this.fetchScores();
+    this.setState({ modalContent: <CoffeeBrewedModal score={score} name={name} /> });
+    this.setState({ showModal: true });
+    setTimeout(() => {
+      this.setState({ showModal: false });
+    }, 10 * 1000);
   }
 
   onCardNotFound = (data) => {
-    // console.log(`Not found card${JSON.stringify(data)}`);
-    this.setState({ rfidToLink: data.rfid });
+    this.setState({ modalContent: <RegistrationModal rfid={data.rfid} /> });
     this.setState({ showModal: true });
 
     setTimeout(() => {
       this.setState({ showModal: false });
     }, 10 * 1000);
   }
-
 
   sortJSON = (JSONobject, keyToSortBy) => {
     // Legal keys: kaffeScore, rfid
@@ -63,10 +66,13 @@ class CoffeeScoreboard extends Component {
   };
 
   displayModal() {
-    const { showModal, rfidToLink } = this.state;
-    // console.log(`displayModal${JSON.stringify(rfidToLink)}`);
+    const { showModal, modalContent } = this.state;
     if (showModal) {
-      return <Modal rfid={rfidToLink} />;
+      return (
+        <Modal>
+          {modalContent}
+        </Modal>
+      );
     }
     return <></>;
   }
@@ -80,7 +86,7 @@ class CoffeeScoreboard extends Component {
   renderScoreboard() {
     const { scoreboard } = this.state;
     return this.sortJSON(scoreboard, 'kaffeScore').map((entry, index) => (
-      <ScoreboardPerson person={entry} index={index} />
+      <ScoreboardPerson person={entry} index={index} key={entry._id} />
     ));
   }
 
